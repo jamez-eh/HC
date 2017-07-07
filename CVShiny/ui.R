@@ -1,7 +1,7 @@
 
 dashboardPage(
-  dashboardHeader(title = "CV Health Canada"),
-  
+  dashboardHeader(title = "CV Health Canada",
+                  titleWidth = 280),
   dashboardSidebar(
     width = 280,
     sidebarMenu(
@@ -14,8 +14,7 @@ dashboardPage(
       # menuSubItem('Drugs per Report', tabName = 'drugdata_number')),
       menuItem("Reactions", tabName = "rxndata"),
       menuItem("About", tabName = "aboutinfo", selected = TRUE),
-      menuItem("Download", tabName = "download_tab"),
-      
+      menuItem("Download", tabName = "download_tab")
     ),
     conditionalPanel(
       condition = "input.name_type == 'brand'",
