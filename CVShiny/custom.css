@@ -1,0 +1,166 @@
+/*
+USE:
+Make sure Shiny app is using DashboardPage with NO skin attribute
+Default skin .skin-blue will be used
+Link this stylesheet in DashboardBody
+*/
+
+.skin-blue .main-header .logo {
+	background-color: #284162;
+}
+
+.skin-blue .main-header .logo:hover {
+	background-color: #284162;
+}
+
+section.sidebar.shiny-bound-input {
+	background-color: #e6e6e6;
+	color: #000000;
+}
+
+.skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
+	background-color: #e6e6e6;
+}
+
+.skin-blue .main-header .navbar {
+	background-color: #284162;
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+	background-color: #e6e6e6;
+}
+
+.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
+	border-left-color: #284162;
+	border-left-width: 10px;
+	background: #ffffff;
+	color: #000000;
+}
+
+.skin-blue .sidebar a {
+	color: #000000;
+	text-decoration: none;
+}
+
+.content-wrapper, .right-side {
+	/*background-color: #f9f9f9;*/
+	background-color: #fff;
+}
+
+.form-control {
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.irs-bar {
+    height: 8px;
+    top: 25px;
+    border-top: none;
+    border-bottom: none;
+    background: #284162;
+}
+
+.irs-slider {
+    top: 21px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #AAA;
+    background: #DDD;
+    border-radius: 20px;
+}
+
+.irs-from, .irs-to, .irs-single {
+    color: #000000;
+    font-size: 11px;
+    line-height: 1.333;
+    text-shadow: none;
+    padding: 1px 3px;
+    background: transparent;
+    border: none;
+}
+
+.irs-grid-pol {
+    opacity: 0.5;
+    background: #999;
+    height: 6px;
+}
+
+#searchButton {
+	color: #ffffff;
+	margin: 6px 5px 6px 0px;
+}
+
+#searchButton:hover {
+	background-color: #2572b4;
+}
+
+.skin-blue .sidebar .btn {
+    color: #ffffff;
+    background-color: #335075;
+    border-color: #143c5f;
+    min-height: 36px;
+    width: 100%;
+}
+
+.skin-blue .sidebar .btn:hover {
+    background-color: #2572b4;
+}
+
+.box, .box-body {
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+}
+
+a {
+	color: #284162;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #0000ff;
+	text-decoration: underline;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: Helvetica,Arial,sans-serif;
+}
+
+h2 {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #af3c43;
+}
+
+body {
+	font-size: 16px;
+	font-family:Helvetica,Arial,sans-serif;
+	background-color: transparent;
+}
+
+.nav-tabs-custom {
+	box-shadow: none;
+}
+
+.nav-tabs-custom>.nav-tabs>li.active {
+	border-top-color: #284162;
+}
+
+.nav-tabs-custom>.nav-tabs>li.active:hover>a, .nav-tabs-custom>.nav-tabs>li.active>a {
+    text-decoration: none;
+}
+
+.nav-tabs-custom>.nav-tabs>li>a, .nav-tabs-custom>.nav-tabs>li>a:hover {
+    text-decoration: none;
+}
+
+.btn-default {
+	color: #ffffff;
+	background-color: #335075;
+    border-color: #143c5f;
+    text-decoration: none;
+}
+
+.btn-default:hover {
+    background-color: #2572b4;
+	color: #fff;
+}
