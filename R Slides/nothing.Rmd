@@ -1,0 +1,51 @@
+---
+title: "Nothing"
+subtitle: "Author: Me"
+output:
+  ioslides_presentation:
+    css:
+      rslides.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Words
+
+The logo graphic will be rescaled <http://outlook.com> to 85x85 (if necessary) and added to the title slide. A smaller icon version of the logo will be included in the bottom-left footer of each slide.
+
+The logo on the title page and the rectangular element containing it can be customised with CSS. For example
+
+## Bullet stuff
+
+- words
+- more words
+- even more words
+
+## R stuff
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Graph that is actually an image
+
+```{r pressure}
+plot(pressure)
+```
+
+## Table things
+
+ID    Fruit        Color
+----- ---------- ---------
+1     Apple      red
+2     Pear       green
+4     Watermelon green
+7     Grapes     red/green
+9     Banana     yellow
+10    Mango      yellow
+11    Pineapple  yellow
+14    Cherry     red
+15    Strawberry red
+17    Blueberry  blue

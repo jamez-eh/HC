@@ -1,0 +1,72 @@
+/*
+Enter author and date as subtitle
+add css file to:
+  output:
+    ioslides_presentation:
+      css:
+        rslides.css
+*/
+
+.title-slide {
+  background-image: url('title.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.title-slide hgroup {
+  bottom: 300px;
+  left: 75px;
+}
+
+.title-slide hgroup h1 {
+  font-family: Arial, sans-serif;
+  font-size: 67px;
+  font-weight: 700;
+  color: rgb(79, 13, 30);
+}
+
+.title-slide hgroup h2 {
+  font-family: Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: rgb(137, 137, 137);
+}
+
+.title-slide hgroup p {
+  font-family: Arial, sans-serif;
+}
+
+slide {
+  background-image: url('page.png');
+  background-size: cover;
+  background-position: center;
+}
+
+slide hgroup h2 {
+  font-family: Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: rgb(79, 13, 30);
+  margin-top: 15px;
+}
+
+slide article {
+  font-family: Arial, sans-serif;
+  font-size: 25px;
+  color: rgb(64, 64, 64);
+}
+
+slide article table.rmdtable th {
+  background: rgb(79, 13, 30);
+  font-size: 20px;
+  padding: 6px;
+}
+
+slide article table.rmdtable td {
+  font-size: 16px;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+}
