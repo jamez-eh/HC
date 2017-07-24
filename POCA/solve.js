@@ -84,7 +84,7 @@ function compareNames() {
   var name2 = $("#drugname1-2").val();
   var algorithm = $("input[name='algorithms1']:checked").val();
 
-  var urlquery = "http://nlp.hres.ca/compareNames.php?string1=" + name1 + "&string2=" + name2 + "&algorithm=" + algorithm + "&fmt=json";
+  var urlquery = "https://nlp.hres.ca/compareNames.php?string1=" + name1 + "&string2=" + name2 + "&algorithm=" + algorithm + "&fmt=json";
 
 
 
@@ -141,7 +141,7 @@ function nearNames() {
     }
   }
 
-  var urlquery = "http://nlp.hres.ca/match.php?q=" + name + dataquery + "&threshold=" + threshold + "&fmt=" + format;
+  var urlquery = "https://nlp.hres.ca/match.php?q=" + name + dataquery + "&threshold=" + threshold + "&fmt=" + format;
 
   $.ajax({
     url: urlquery,
@@ -160,10 +160,10 @@ function allTables() {
   var format = $("#format3").val();
 
   if (format == "html") {
-    var urlquery = "http://nlp.hres.ca/listTables.php?fmt=json";
+    var urlquery = "https://nlp.hres.ca/listTables.php?fmt=json";
   }
   else {
-    var urlquery = "http://nlp.hres.ca/listTables.php?fmt=" + format;
+    var urlquery = "https://nlp.hres.ca/listTables.php?fmt=" + format;
   }
 
   $.ajax({
