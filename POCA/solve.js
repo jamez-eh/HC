@@ -182,7 +182,6 @@ function nearNames() {
       $("#err2").css("display", "inline");
     }
   }
-
 }
 
 function allTables() {
