@@ -168,3 +168,9 @@ td {
 .score {
   width: 65px;
 }
+
+#err2 {
+  display: none;
+  color: red;
+  font-style: italic;
+}

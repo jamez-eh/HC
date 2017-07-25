@@ -78,79 +78,111 @@ function reload() {
 
 function compareNames() {
 
-  show1();
+  if ($("#drugname1-1").val() != "" && $("#drugname1-2").val() != "") {
+    show1();
 
-  var name1 = $("#drugname1-1").val();
-  var name2 = $("#drugname1-2").val();
-  var algorithm = $("input[name='algorithms1']:checked").val();
+    $("#drugname1-1").css("border", "none");
+    $("#drugname1-1").css("border-bottom", "2px solid black");
+    $("#drugname1-2").css("border", "none");
+    $("#drugname1-2").css("border-bottom", "2px solid black");
 
-  var urlquery = "https://nlp.hres.ca/compareNames.php?string1=" + name1 + "&string2=" + name2 + "&algorithm=" + algorithm + "&fmt=json";
+    var name1 = $("#drugname1-1").val();
+    var name2 = $("#drugname1-2").val();
+    var algorithm = $("input[name='algorithms1']:checked").val();
 
+    var urlquery = "https://nlp.hres.ca/compareNames.php?string1=" + name1 + "&string2=" + name2 + "&algorithm=" + algorithm + "&fmt=json";
 
+    $.ajax({
+      url: urlquery,
+      method: "GET",
+      success: function(data, success) {
 
-  $.ajax({
-    url: urlquery,
-    method: "GET",
-    success: function(data, success) {
+        var score = data["nlp.hres.ca//compareNames/"]["http://www.w3.org/1999/02/22-rdf-syntax-ns#value"][0].value;
 
-      var score = data["nlp.hres.ca//compareNames/"]["http://www.w3.org/1999/02/22-rdf-syntax-ns#value"][0].value;
+        if (algorithm == "avg") {
+          alg = "Average";
+        }
+        else {
+          alg = algorithm.toUpperCase();
+        }
 
-      if (algorithm == "avg") {
-        alg = "Average";
+        $("#res1").css("display", "block");
+        $("#res1").html("<table class='small'><tr><th></th><th>" + alg + "</th></tr><tr><td class='score'>Score</td><td>" + score + "</td></tr></table>");
       }
-      else {
-        alg = algorithm.toUpperCase();
-      }
-
-      $("#res1").css("display", "block");
-      $("#res1").html("<table class='small'><tr><th></th><th>" + alg + "</th></tr><tr><td class='score'>Score</td><td>" + score + "</td></tr></table>");
+    });
+  }
+  else {
+    if ($("#drugname1-1").val() == "") {
+      $("#drugname1-1").css("border", "1px solid red");
     }
-  });
+
+    if ($("#drugname1-2").val() == "") {
+      $("#drugname1-2").css("border", "1px solid red");
+    }
+  }
 }
 
 function nearNames() {
 
-  show2();
+  var t = getChecked("data2").length;
 
-  var name = $("#drugname2-1").val();
-  var threshold = $("#threshold2").val();
+  if ($("#drugname2-1").val() != "" && t > 0) {
+    show2();
 
-  if (threshold == "") {
-    threshold = 0;
-    $("#threshold2").html("0.000");
-  }
-  else if (threshold > 100) {
-    threshold = 100;
-    $("#threshold2").html("100.000");
-  }
-  else if (threshold < 0) {
-    threshold = 0;
-    $("#threshold2").html("0.000");
-  }
+    $("#drugname2-1").css("border", "none");
+    $("#drugname2-1").css("border-bottom", "2px solid black");
+    $("#err2").css("display", "none");
 
-  var format = $("#format2").val();
-  var datasets = getChecked("data2");
-  var dataquery = "&tables=";
+    var name = $("#drugname2-1").val();
+    var threshold = $("#threshold2").val();
 
-  for (var i = 0; i < datasets.length; i++) {
-    if (i == 0) {
-      dataquery += datasets[i] + ":" + threshold;
+    if (threshold == "") {
+      $("#threshold2").val('50');
+      threshold = 50;
     }
-    else {
-      dataquery += "," + datasets[i] + ":" + threshold;
+    else if (threshold > 100) {
+      $("#threshold2").val('100');
+      threshold = 100;
+    }
+    else if (threshold < 0) {
+      $("#threshold2").val('0');
+      threshold = 0;
+    }
+
+    var format = $("#format2").val();
+    var datasets = getChecked("data2");
+    var dataquery = "&tables=";
+
+    for (var i = 0; i < datasets.length; i++) {
+      if (i == 0) {
+        dataquery += datasets[i] + ":" + threshold;
+      }
+      else {
+        dataquery += "," + datasets[i] + ":" + threshold;
+      }
+    }
+
+    var urlquery = "https://nlp.hres.ca/match.php?q=" + name + dataquery + "&threshold=" + threshold + "&fmt=" + format;
+
+    $.ajax({
+      url: urlquery,
+      method: "GET",
+      success: function(data, success) {
+        $("#res2").css("display", "block");
+        $("#res2").html(data);
+      }
+    });
+  }
+  else {
+    if ($("#drugname2-1").val() == "") {
+      $("#drugname2-1").css("border", "1px solid red");
+    }
+
+    if (t < 1) {
+      $("#err2").css("display", "inline");
     }
   }
 
-  var urlquery = "https://nlp.hres.ca/match.php?q=" + name + dataquery + "&threshold=" + threshold + "&fmt=" + format;
-
-  $.ajax({
-    url: urlquery,
-    method: "GET",
-    success: function(data, success) {
-      $("#res2").css("display", "block");
-      $("#res2").html(data);
-    }
-  });
 }
 
 function allTables() {
