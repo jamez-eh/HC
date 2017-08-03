@@ -174,3 +174,8 @@ td {
   color: red;
   font-style: italic;
 }
+
+#dwnld {
+  font-size: 20px;
+  text-align: center;
+}

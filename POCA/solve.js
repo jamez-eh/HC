@@ -1,4 +1,8 @@
 
+$(function () {
+
+});
+
 function show1() {
   $("#page1").css("display", "block");
   $("#page2").css("display", "none");
@@ -134,19 +138,33 @@ function nearNames() {
     $("#err2").css("display", "none");
 
     var name = $("#drugname2-1").val();
-    var threshold = $("#threshold2").val();
+    var threshold0 = $("#threshold2-0").val();
+    var threshold1 = $("#threshold2-1").val();
 
-    if (threshold == "") {
-      $("#threshold2").val('50');
-      threshold = 50;
+    if (threshold0 == "") {
+      $("#threshold2-0").val('90');
+      threshold0 = 90;
     }
-    else if (threshold > 100) {
-      $("#threshold2").val('100');
-      threshold = 100;
+    else if (threshold0 > 100) {
+      $("#threshold2-0").val('100');
+      threshold1 = 100;
     }
-    else if (threshold < 0) {
-      $("#threshold2").val('0');
-      threshold = 0;
+    else if (threshold0 < 0) {
+      $("#threshold2-0").val('0');
+      threshold0 = 0;
+    }
+
+    if (threshold1 == "") {
+      $("#threshold2-1").val('90');
+      threshold1 = 90;
+    }
+    else if (threshold1 > 100) {
+      $("#threshold2-1").val('100');
+      threshold1 = 100;
+    }
+    else if (threshold1 < 0) {
+      $("#threshold2-1").val('0');
+      threshold1 = 0;
     }
 
     var format = $("#format2").val();
@@ -155,21 +173,40 @@ function nearNames() {
 
     for (var i = 0; i < datasets.length; i++) {
       if (i == 0) {
-        dataquery += datasets[i] + ":" + threshold;
+        dataquery += datasets[i].data + ":" + datasets[i].threshold;
       }
       else {
-        dataquery += "," + datasets[i] + ":" + threshold;
+        dataquery += "," + datasets[i].data + ":" + datasets[i].threshold;
       }
     }
 
-    var urlquery = "https://nlp.hres.ca/match.php?q=" + name + dataquery + "&threshold=" + threshold + "&fmt=" + format;
+    var urlquery = "https://nlp.hres.ca/match.php?q=" + name + dataquery + "&fmt=" + format;
 
     $.ajax({
       url: urlquery,
       method: "GET",
       success: function(data, success) {
-        $("#res2").css("display", "block");
-        $("#res2").html(data);
+
+        if (format == "html") {
+          $("#res2").css("display", "block");
+          $("#res2").html(data);
+          $("table").attr("class", "data_tbl2");
+          $(".data_tbl2").DataTable();
+        }
+        else if (format == "csv") {
+          var csv = data;
+          var a = document.createElement('a');
+
+          a.textContent='Download CSV';
+          a.download="poca2-results.csv";
+          a.href='data:text/csv;charset=utf-8,'+escape(csv);
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+
+          $("#res2").html("<p id='dwnld'>Download Succesful</p>");
+        }
+
       }
     });
   }
@@ -203,7 +240,7 @@ function allTables() {
     success: function(data, success) {
 
       if (format == "html") {
-        var jstable = "<table><tr><th>ID</th><th>Name</th><th>Description</th><th>Size</th></tr>"
+        var jstable = "<table id='allTables'><tr><th>ID</th><th>Name</th><th>Description</th><th>Size</th></tr>"
 
         for (var key in data) {
           if (data.hasOwnProperty(key)) {
@@ -219,6 +256,9 @@ function allTables() {
 
         jstable += "</table>";
         $("#res3").html(jstable);
+
+        $("table").attr("class", "data_tbl");
+        $(".data_tbl").DataTable();
       }
 
       if (format == "json") {
@@ -236,7 +276,7 @@ function getChecked(group) {
 
   for (var i = 0; i < boxes.length; i++) {
     if (boxes[i].checked) {
-      checked.push($(boxes[i]).val());
+      checked.push({data: $(boxes[i]).val(), threshold: $("#threshold2-" + i).val()});
     }
   }
 
