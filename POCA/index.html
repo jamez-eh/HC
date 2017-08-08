@@ -47,10 +47,12 @@
       <label class="label">Data Sets:</label>
       <label id="err2">**Select at least 1 data set</label>
       <br>
-      <input id="natural_health2" type="checkbox" name="data2" value="natural_health"><label for="natural_health2">natural_health</label>
-      <input id="threshold2-0" class="threshold" type="text" placeholder="90.000"><br>
-      <input id="drug_names2" type="checkbox" name="data2" value="drug_names"><label for="drug_names2">drug_names</label>
-      <input id="threshold2-1" class="threshold" type="text" placeholder="90.000"><br>
+      <div id="dynamicDataSets">
+        <input id="natural_health2" type="checkbox" name="data2" value="natural_health"><label for="natural_health2">natural_health</label>
+        <input id="threshold2-0" class="threshold" type="text" placeholder="90.000"><br>
+        <input id="drug_names2" type="checkbox" name="data2" value="drug_names"><label for="drug_names2">drug_names</label>
+        <input id="threshold2-1" class="threshold" type="text" placeholder="90.000"><br>
+      </div>
       <br>
       <label class="label">Format: </label>
       <select id="format2">
@@ -97,7 +99,7 @@
     <p>Enter a threshold value between 0.000 and 100.000. If no threshold is entered 90.000 will be used. Values higher or lower than the bound limits will be formatted to the max or min respectively.</p>
   </div>
   <div id="res1">
-  </div>
+  </div> 
   <div id="res2">
     <table id="namesTable"></table>
   </div>

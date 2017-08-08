@@ -1,6 +1,37 @@
 
 $(function () {
 
+  $.ajax({
+    url: "https://nlp.hres.ca/listTables.php?fmt=json",
+    method: "GET",
+    success: function(data, success) {
+
+      var datahtml = "";
+      var i = 0;
+
+      for (var key in data) {
+        if (data.hasOwnProperty(key)) {
+          var name = data[key]["http://xmlns.com/foaf/0.1/name"][0].value;
+
+          datahtml += "<input id='" + name + "2' type='checkbox' name='data2' value='" + name + "'><label for='" + name + "2'>" + name + "</label>";
+          datahtml += "<input id='threshold2-" + i +"' class='threshold' type='text' placeholder='90.000'><br>";
+        }
+
+        i++;
+      }
+
+      if (datahtml == "") {
+        $("#dynamicDataSets").html("<p>No data sets available</p>");
+      }
+      else {
+        $("#dynamicDataSets").html(datahtml);
+      }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      alert("Status: " + textStatus);
+      alert("Error: " + errorThrown);
+    }
+  });
 });
 
 function show1() {
@@ -142,6 +173,7 @@ function nearNames() {
     $("#err2").css("display", "none");
 
     var name = $("#drugname2-1").val();
+/*
     var threshold0 = $("#threshold2-0").val();
     var threshold1 = $("#threshold2-1").val();
 
@@ -169,7 +201,20 @@ function nearNames() {
     else if (threshold1 < 0) {
       $("#threshold2-1").val('0');
       threshold1 = 0;
-    }
+    }*/
+
+    $(".threshold").each(function() {
+
+      if ($(this).val() == "") {
+        $(this).val('90');
+      }
+      else if ($(this).val() > 100) {
+        $(this).val('100');
+      }
+      else if ($(this).val() < 0) {
+        $(this).val('0');
+      }
+    });
 
     var format = $("#format2").val();
     var isHTML = false;
@@ -192,7 +237,7 @@ function nearNames() {
     }
 
     var urlquery = "https://nlp.hres.ca/match.php?q=" + name + dataquery + "&fmt=" + format;
-
+console.log(urlquery);
     $.ajax({
       url: urlquery,
       method: "GET",
