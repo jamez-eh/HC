@@ -1,0 +1,108 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="./poca.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./solve.js"></script>
+  <script type="text/javascript" data-pace-options='{"document": false}' src="pace.js"></script>
+  <link rel="stylesheet" type="text/css" href="pace-theme-loading-bar.css" />
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+  <script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+  <title>POCA 2</title>
+</head>
+<body>
+  <div id="head">
+    <div>
+      <h1 id="title" onclick="reload()">POCA 2</h1>
+    </div>
+    <div id="pages">
+      <button id="b1" onclick="show1()">Compare Names</button>
+      <button id="b2" onclick="show2()">Near Names</button>
+      <button id="b3" onclick="show3()">List All Tables</button>
+      <button id="b4" onclick="showInfo()">Info</button>
+    </div>
+  </div>
+  <div id="page1">
+    <h2>Compare Names</h2>
+    <form onsubmit="return false;">
+      <label class="label">Drug Names: </label>
+      <input id="drugname1-1" type="text" placeholder="drug 1">
+      <input id="drugname1-2" type="text" placeholder="drug 2"><br>
+      <label class="label">Algorithms: </label>
+      <input id="avg1" type="radio" name="algorithms1" checked="checked" value="avg"><label for="avg1">Average</label>
+      <input id="aline1" type="radio" name="algorithms1" value="aline"><label for="aline1">ALINE</label>
+      <input id="bisim1" type="radio" name="algorithms1" value="bisim"><label for="bisim1">BISIM</label>
+      <br>
+      <div class="search">
+        <input class="submit" type="submit" onclick="compareNames()" value="Search">
+        <input class="reset" type="reset" value="Reset">
+      </div>
+    </form>
+  </div>
+  <div id="page2">
+    <h2>Near Names</h2>
+    <form onsubmit="return false;">
+      <label class="label">Drug Name: </label>
+      <input id="drugname2-1" type="text"><br>
+      <label class="label">Data Sets:</label>
+      <label id="err2">**Select at least 1 data set</label>
+      <br>
+      <input id="natural_health2" type="checkbox" name="data2" value="natural_health"><label for="natural_health2">natural_health</label>
+      <input id="threshold2-0" class="threshold" type="text" placeholder="90.000"><br>
+      <input id="drug_names2" type="checkbox" name="data2" value="drug_names"><label for="drug_names2">drug_names</label>
+      <input id="threshold2-1" class="threshold" type="text" placeholder="90.000"><br>
+      <br>
+      <label class="label">Format: </label>
+      <select id="format2">
+        <option selected="selected" value="html">HTML</option>
+        <option value="xls">XLS</option>
+        <option value="csv">CSV</option>
+        <option value="json">JSON</option>
+        <option value="rdfxml">RDF/XML</option>
+      </select><br>
+      <div class="search">
+        <input class="submit" type="submit" onclick="nearNames()" value="Search">
+        <input class="reset" type="reset" value="Reset">
+      </div>
+    </form>
+  </div>
+  <div id="page3">
+    <h2>List All Tables</h2>
+    <form onsubmit="return false;">
+      <label class="label">Format: </label>
+      <select id="format3">
+        <option selected="selected" value="html">HTML</option>
+        <option value="xls">XLS</option>
+        <option value="csv">CSV</option>
+        <option value="json">JSON</option>
+        <option value="rdfxml">RDF/XML</option>
+      </select><br>
+      <div class="search">
+        <input class="submit" type="submit" onclick="allTables()" value="Search">
+        <input class="reset" type="reset" value="Reset">
+      </div>
+    </form>
+  </div>
+  <div id="infoPage">
+    <h2>Formats</h2>
+    <p><strong>HTML:</strong> Select for viewing in the browser<br>
+      <strong>XLS:</strong> Select for viewing in Microsoft Office Excel<br>
+      <strong>CSV:</strong> Select for external use as csv<br>
+      <strong>JSON:</strong> Select for external use as a json object<br>
+      <strong>RDF/XML:</strong> Select for external use as xml
+    </p>
+    <h2>Algorithms</h2>
+    <p>Average will return the arithmetic mean of the two (ALINE & BISIM) scores.</p>
+    <h2>Threshold</h2>
+    <p>Enter a threshold value between 0.000 and 100.000. If no threshold is entered 90.000 will be used. Values higher or lower than the bound limits will be formatted to the max or min respectively.</p>
+  </div>
+  <div id="res1">
+  </div>
+  <div id="res2">
+    <table id="namesTable"></table>
+  </div>
+  <div id="res3">
+    <table id="allTables"></table>
+  </div>
+</body>
+</html>
