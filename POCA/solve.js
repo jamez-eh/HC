@@ -112,6 +112,10 @@ function compareNames() {
 
         $("#res1").css("display", "block");
         $("#res1").html("<table class='small'><tr><th></th><th>" + alg + "</th></tr><tr><td class='score'>Score</td><td>" + score + "</td></tr></table>");
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("Status: " + textStatus);
+        alert("Error: " + errorThrown);
       }
     });
   }
@@ -127,11 +131,6 @@ function compareNames() {
 }
 
 function nearNames() {
-
-  if ($.fn.dataTable.isDataTable("#namesTable")) {
-    var table = $("namesTable").DataTable();
-    table.destory();
-  }
 
   var t = getChecked("data2").length;
 
@@ -197,6 +196,7 @@ function nearNames() {
     $.ajax({
       url: urlquery,
       method: "GET",
+      dataType: "json",
       success: function(data, success) {
 
         if (isHTML) {
@@ -218,6 +218,7 @@ function nearNames() {
 
           $("#res2").css("display", "block");
           $("#namesTable").DataTable({
+            destroy: true,
             data: ds,
             columns: [
               {title: "Data Set"},
@@ -242,6 +243,10 @@ function nearNames() {
 
           $("#res2").html("<p id='dwnld'>Download Succesful</p>");
         }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("Status: " + textStatus);
+        alert("Error: " + errorThrown);
       }
     });
   }
@@ -257,11 +262,6 @@ function nearNames() {
 }
 
 function allTables() {
-
-  if ($.fn.dataTable.isDataTable("#allTables")) {
-    var table = $("#allTables").DataTable();
-    table.destroy();
-  }
 
   show3();
 
@@ -295,6 +295,7 @@ function allTables() {
         }
 
         $("#allTables").DataTable({
+          destroy: true,
           data: ds,
           columns: [
             {title: "ID"},
@@ -310,6 +311,10 @@ function allTables() {
       }
 
       $("#res3").css("display", "block");
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      alert("Status: " + textStatus);
+      alert("Error: " + errorThrown);
     }
   });
 }

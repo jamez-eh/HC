@@ -65,7 +65,7 @@ h2 {
   font-weight: 700;
 }
 
-input[type=text] {
+input[type=text], input[type=search] {
   border: none;
   border-bottom: 2px solid black;
   color: #545556;
@@ -155,9 +155,16 @@ th {
   padding: 3px 6px 3px 6px;
 }
 
+tr:nth-child(even) > td {
+    background-color: #ffffff;
+}
+
+tr:nth-child(odd) > td {
+  background-color: #f7f9fc;
+}
+
 td {
   border: none;
-  background-color: #e5e5e5;
   padding: 3px 6px 3px 6px;
 }
 
