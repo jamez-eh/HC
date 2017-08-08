@@ -128,6 +128,11 @@ function compareNames() {
 
 function nearNames() {
 
+  if ($.fn.dataTable.isDataTable("#namesTable")) {
+    var table = $("namesTable").DataTable();
+    table.destory();
+  }
+
   var t = getChecked("data2").length;
 
   if ($("#drugname2-1").val() != "" && t > 0) {
@@ -168,6 +173,13 @@ function nearNames() {
     }
 
     var format = $("#format2").val();
+    var isHTML = false;
+
+    if (format == "html") {
+      format = "json";
+      isHTML = true;
+    }
+
     var datasets = getChecked("data2");
     var dataquery = "&tables=";
 
@@ -187,11 +199,35 @@ function nearNames() {
       method: "GET",
       success: function(data, success) {
 
-        if (format == "html") {
+        if (isHTML) {
+          var ds = [];
+
+          for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+              var row = [];
+              row.push(data[key]["tableName"]);
+              row.push(data[key]["drugName"]);
+              row.push(data[key]["ID"]);
+              row.push(data[key]["avg_score"]);
+              row.push(data[key]["aline_score"]);
+              row.push(data[key]["bisim_score"]);
+
+              ds.push(row);
+            }
+          }
+
           $("#res2").css("display", "block");
-          $("#res2").html(data);
-          $("table").attr("class", "data_tbl2");
-          $(".data_tbl2").DataTable();
+          $("#namesTable").DataTable({
+            data: ds,
+            columns: [
+              {title: "Data Set"},
+              {title: "Drug Name"},
+              {title: "ID"},
+              {title: "Average Score"},
+              {title: "ALINE Score"},
+              {title: "BISIM Score"}
+            ]
+          });
         }
         else if (format == "csv") {
           var csv = data;
@@ -206,7 +242,6 @@ function nearNames() {
 
           $("#res2").html("<p id='dwnld'>Download Succesful</p>");
         }
-
       }
     });
   }
@@ -222,6 +257,11 @@ function nearNames() {
 }
 
 function allTables() {
+
+  if ($.fn.dataTable.isDataTable("#allTables")) {
+    var table = $("#allTables").DataTable();
+    table.destroy();
+  }
 
   show3();
 
@@ -240,25 +280,29 @@ function allTables() {
     success: function(data, success) {
 
       if (format == "html") {
-        var jstable = "<table id='allTables'><tr><th>ID</th><th>Name</th><th>Description</th><th>Size</th></tr>"
+        var ds = [];
 
         for (var key in data) {
           if (data.hasOwnProperty(key)) {
+            var row = [];
+            row.push(data[key]["http://purl.org/dc/terms/identifier"][0].value);
+            row.push(data[key]["http://xmlns.com/foaf/0.1/name"][0].value);
+            row.push(data[key]["http://www.w3.org/2004/02/skos/core#description"][0].value);
+            row.push(data[key]["http://purl.org/dc/terms/extent"][0].value);
 
-            var idCol = "<td>" + data[key]["http://purl.org/dc/terms/identifier"][0].value + "</td>";
-            var nameCol = "<td>" + data[key]["http://xmlns.com/foaf/0.1/name"][0].value + "</td>";
-            var descrCol = "<td>" + data[key]["http://www.w3.org/2004/02/skos/core#description"][0].value + "</td>";
-            var sizeCol = "<td>" + data[key]["http://purl.org/dc/terms/extent"][0].value + "</td>";
-
-            jstable += "<tr>" + idCol + nameCol + descrCol + sizeCol + "</tr>";
+            ds.push(row);
           }
         }
 
-        jstable += "</table>";
-        $("#res3").html(jstable);
-
-        $("table").attr("class", "data_tbl");
-        $(".data_tbl").DataTable();
+        $("#allTables").DataTable({
+          data: ds,
+          columns: [
+            {title: "ID"},
+            {title: "Name"},
+            {title: "Description"},
+            {title: "Size"}
+          ]
+        });
       }
 
       if (format == "json") {
