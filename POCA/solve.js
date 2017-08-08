@@ -196,7 +196,6 @@ function nearNames() {
     $.ajax({
       url: urlquery,
       method: "GET",
-      dataType: "json",
       success: function(data, success) {
 
         if (isHTML) {
@@ -217,6 +216,7 @@ function nearNames() {
           }
 
           $("#res2").css("display", "block");
+          $("#res2").html("<table id='namesTable'></table>");
           $("#namesTable").DataTable({
             destroy: true,
             data: ds,
