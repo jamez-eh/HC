@@ -237,7 +237,7 @@ function nearNames() {
     }
 
     var urlquery = "https://nlp.hres.ca/match.php?q=" + name + dataquery + "&fmt=" + format;
-console.log(urlquery);
+
     $.ajax({
       url: urlquery,
       method: "GET",
@@ -252,9 +252,9 @@ console.log(urlquery);
               row.push(data[key]["tableName"]);
               row.push(data[key]["drugName"]);
               row.push(data[key]["ID"]);
-              row.push(data[key]["avg_score"]);
-              row.push(data[key]["aline_score"]);
-              row.push(data[key]["bisim_score"]);
+              row.push(parseFloat(data[key]["avg_score"]).toFixed(3));
+              row.push(parseFloat(data[key]["aline_score"]).toFixed(3));
+              row.push(parseFloat(data[key]["bisim_score"]).toFixed(3));
 
               ds.push(row);
             }
