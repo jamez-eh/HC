@@ -173,35 +173,6 @@ function nearNames() {
     $("#err2").css("display", "none");
 
     var name = $("#drugname2-1").val();
-/*
-    var threshold0 = $("#threshold2-0").val();
-    var threshold1 = $("#threshold2-1").val();
-
-    if (threshold0 == "") {
-      $("#threshold2-0").val('90');
-      threshold0 = 90;
-    }
-    else if (threshold0 > 100) {
-      $("#threshold2-0").val('100');
-      threshold1 = 100;
-    }
-    else if (threshold0 < 0) {
-      $("#threshold2-0").val('0');
-      threshold0 = 0;
-    }
-
-    if (threshold1 == "") {
-      $("#threshold2-1").val('90');
-      threshold1 = 90;
-    }
-    else if (threshold1 > 100) {
-      $("#threshold2-1").val('100');
-      threshold1 = 100;
-    }
-    else if (threshold1 < 0) {
-      $("#threshold2-1").val('0');
-      threshold1 = 0;
-    }*/
 
     $(".threshold").each(function() {
 
