@@ -5,7 +5,7 @@
 	<!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
-		<!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW) wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->    
+		<!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW) wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
 		<title>Drug Product Database - Online Query</title>
 		<!-- metadata -->
 		<meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -24,7 +24,7 @@
 		<!-- Load jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script rel="script" src="./request3.js" type="text/javascript"></script>
-		<script rel="script" src="./auto-complete.min.js" type="text/javascript"></script>	
+		<script rel="script" src="./auto-complete.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="./auto-complete.css" type="text/css">
 		<noscript>
 			<!-- Write closure fall-back static file -->
@@ -39,19 +39,19 @@
 			<![endif]-->
 			<!--[if lte IE 9]><![endif]-->
 			<link rel="stylesheet" href="https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_21/css/noscript.min.css" />
-		</noscript>    
+		</noscript>
 		<!-- Write closure template -->
 		<script type="text/javascript">
 			document.write(wet.builder.refTop({cdnEnv: "prod"}));
 		</script>
-		<script> 
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ 
-			   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), 
-			   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) 
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); 
-			ga('create', 'UA-90626095-1', 'auto'); 
-			ga('send', 'pageview');		
-		</script>     
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-90626095-1', 'auto');
+			ga('send', 'pageview');
+		</script>
 		<!--  GoC Web Template Build Version 4.0.21.1 -->
 	</head>
 	<body vocab="http://schema.org/" typeof="WebPage">
@@ -144,16 +144,16 @@
 				 }],
 				 showPreContent: true,
 				 breadcrumbs: [{title: 'Home', href: 'http://www.hc-sc.gc.ca/index-eng.php'},{title: 'Drugs &amp; Health Products', href: 'http://www.hc-sc.gc.ca/dhp-mps/index-eng.php'},{title: 'Drug Products', href: 'http://www.hc-sc.gc.ca/dhp-mps/prodpharma/index-eng.php'},{title: 'Drug Product Database', href: 'https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/drug-product-database.html'},{title: 'Online Query'},],
-				
+
 			 });
 		</script>
         <main role="main" property="mainContentOfPage" class="container">
-		<div class="row"> 
-			<div class="col-md-12"> 
-				<h1 property="name" id="wb-cont">Drug Product Database - Online Query</h1> 
-				<p class="pagetag">From <a href="http://www.healthycanadians.gc.ca/department-ministere/hc-sc-eng.php?_ga=1.203751760.1566644155.1449063473">Health Canada</a></p> 
-			</div> 
-		</div> 
+		<div class="row">
+			<div class="col-md-12">
+				<h1 property="name" id="wb-cont">Drug Product Database - Online Query</h1>
+				<p class="pagetag">From <a href="http://www.healthycanadians.gc.ca/department-ministere/hc-sc-eng.php?_ga=1.203751760.1566644155.1449063473">Health Canada</a></p>
+			</div>
+		</div>
         <!-- main content -->
 		<!--Display application error messages-->
 		<div id="queryFields">
@@ -161,10 +161,10 @@
 		<p class="well">Due to the fact that the information originated with an organization that is not subject to the Official Languages Act, the document may only appear in the language in which it was written. Translations of the document are the responsibility of the sponsor involved.</p>
 		<h3>Search criteria</h3>
 		<p class="help-block">Enter any identifiers of the product(s) you are searching for (i.e. Drug Identification Number, Anatomical Therapeutic Chemical code, company, product name, active ingredient(s) ect.) <strong>Separate keywords with a space.</strong></p>
-		
+
 		<form name="searchForm" onsubmit="return false;" class="form-horizontal">
 			<input type="hidden" name="lang" value='en'/>
-			
+
 			<fieldset class="mrgn-tp-md"><br><legend style="text-align: center">Drug Product Database</legend>
 				<div>
 					<input style="width: 70vh; margin: auto" type="text" name="search" value="" id="search" class="form-control">
@@ -178,18 +178,18 @@
 								$.get(query, function(data) {
 									console.log(data[0]);
 									var choices = $.map(data, function(obj) {
-										return [obj.ingredient + " (ingredient)", obj.company_name + " (company)", obj.brand_name + " (brand)"] 
+										return [obj.ingredient + " (ingredient)", obj.company_name + " (company)", obj.brand_name + " (brand)"]
 									});
 									console.log(choices);
 									var matches = [];
 									for (i=0; i<choices.length; i++) {
 										if (~choices[i].toLowerCase().indexOf(term)) {
 											var keyword = choices[i];
-											
+
 											//deal with cases such as brackets and mcneil consumer division pfizer consumer division too long??
-											
+
 											if ($.inArray(keyword.toLowerCase(), matches) == -1) {
-												matches.push(keyword.toLowerCase()); 
+												matches.push(keyword.toLowerCase());
 											}
 										}
 									}
@@ -201,7 +201,7 @@
 				</div>
 			</fieldset><br>
 
-			<div class="form-group">	
+			<div class="form-group">
 				<div style="text-align: center">
 					<input type="submit" name="method" onclick="prepare()" value="Search" class="btn btn-primary mrgn-rght-sm mrgn-lft-md">
 					<input type="reset" name="method" value="Reset" class="btn btn-default">
@@ -209,7 +209,7 @@
 			</div>
 		</form>
 		</div>
-		
+
 		<div id="queryResults" style="display: none">
 			<button class="btn btn-default text-center" onclick="newSearch()">New Search</button>
 			<table id="drugTable" class="table table-striped">
@@ -221,8 +221,8 @@
 						<th scope="col">Company</th>
 						<th scope="col">Product</th>
 						<th scope="col">Class</th>
-						<th scope="col">Active Ingredient</th>
-						<th scope="col">Strength</th>
+						<th scope="col" style="width: 23%">Active Ingredient(s)</th>
+						<!--<th scope="col">Strength</th>-->
 					</tr>
 				</thead>
 				<tbody id="drugTableContents">
@@ -233,7 +233,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>
+						<!--<td></td>-->
 					</tr>
 				</tbody>
 			</table>
@@ -243,11 +243,11 @@
 			</div>
 			<button class="btn btn-default text-center" onclick="newSearch()">New Search</button>
 		</div>
-		
+
 		<!-- TESTING ONLY -->
 		<!-- <p id="test">yes</p> -->
 		<!-- END TESTING -->
-		
+
         <!-- end content -->
 		<!-- SUB-HEADER BEGINS | DEBUT DU SOUS EN-TETE -->
 		<div class="wb-eqht">
@@ -265,15 +265,15 @@
 					<li><a href="http://www.hc-sc.gc.ca/dhp-mps/medeff/advisories-avis/index-eng.php"> MedEffect Canada </a></li>
 					<li><a href="http://www.hc-sc.gc.ca/dhp-mps/vet/advers-react-neg/index-eng.php"> Adverse drug reaction - veterinary drugs </a></li>
 					<li><a href="http://www.hc-sc.gc.ca/dhp-mps/prodpharma/notices-avis/index-eng.php" > Notice of compliance database </a></li>
-					<li><a href="https://health-products.canada.ca/natural-licences-search" >Licensed natural health products database</a></li>	
+					<li><a href="https://health-products.canada.ca/natural-licences-search" >Licensed natural health products database</a></li>
 				</ul>
-			</section>		
+			</section>
 			<section class="sect-lnks">
 				<h2>Contact us</h2>
 				<ul class="list-unstyled">
 					<li><a href="http://www.hc-sc.gc.ca/dhp-mps/contact/tpd-dpt/contact_sipdmail_dpprposte-eng.php"> Content support </a></li>
 					<li><a href="http://www.hc-sc.gc.ca/dhp-mps/contact/oimt-bgit/contact_dpd_bdpp_admin-eng.php">Technical support</a></li>
-				</ul>	
+				</ul>
 			</section>
 		</div>
 		<!-- SUB-HEADER ENDS | FIN DU SOUS EN-TETE-->
@@ -287,7 +287,7 @@
 					</dl>
 				</div>
 			</div>
-        </div> 
+        </div>
         <!-- Write closure template -->
         <script type="text/javascript">
             var defPreFooter = document.getElementById("def-preFooter");
@@ -298,8 +298,8 @@
                 showFeedback: true,
                 showShare: [ 'bitly',  'linkedin',  'blogger',  'myspace',  'delicious',  'pinterest',  'digg',  'reddit',  'diigo',  'stumbleupon',  'email',  'tumblr',  'facebook',  'twitter',  'gmail',  'yahoomail',  'googleplus', ],
 	        });
-	    </script>   
-        </main>	
+	    </script>
+        </main>
         <div id="def-footer">
             <!-- Write closure fall-back static file -->
             <footer role="contentinfo" id="wb-info">
@@ -313,7 +313,7 @@
 									<li><a href="https://www.canada.ca/en/contact.html">Contact information</a></li>
 								</ul>
 							</section>
-							<section>	
+							<section>
 								<h3>News</h3>
 								<ul class="list-unstyled">
 									<li><a href="http://news.gc.ca/web/index-en.do">Newsroom</a></li>
@@ -387,7 +387,7 @@
                 showFeatures: true,
             });
         </script>
-        <!-- Write closure template --> 
+        <!-- Write closure template -->
         <script type="text/javascript">
 			document.write(wet.builder.refFooter({
 			    cdnEnv: "prod",
