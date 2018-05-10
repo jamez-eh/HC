@@ -1,0 +1,1142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.1",
+    "title": "Drug Product Database (DPD) API",
+    "description": "From Health Canada",
+    "contact": {
+      "email": "bimal.bhagrath@canada.ca"
+    }
+  },
+  "host": "https:\/\/rest-dev.hres.ca\/rest-dev",
+  "basePath": "\/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "\/dpd_json": {
+      "get": {
+        "tags": [
+          "dpd_json"
+        ],
+        "produces": [
+          "application\/json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Accept",
+            "type": "string",
+            "enum": [
+              "application/json",
+              "text/csv"
+            ],
+            "description": "Response fomrat"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "default": "items",
+            "required": false,
+            "in": "header",
+            "name": "Range-Unit",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "offset",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "limit",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "select",
+            "type": "string",
+            "description": "Filtering Columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "order",
+            "type": "string",
+            "enum": [
+              "extract.asc.nullsfirst",
+              "extract.asc.nulllast",
+              "extract.asc",
+              "extract.desc.nullsfirst",
+              "extract.desc.nulllast",
+              "extract.desc",
+              "extract.nullsfirst",
+              "extract.nulllast",
+              "extract",
+              "drug_code.asc.nullsfirst",
+              "drug_code.asc.nulllast",
+              "drug_code.asc",
+              "drug_code.desc.nullsfirst",
+              "drug_code.desc.nulllast",
+              "drug_code.desc",
+              "drug_code.nullsfirst",
+              "drug_code.nulllast",
+              "drug_code",
+              "drug_product.asc.nullsfirst",
+              "drug_product.asc.nulllast",
+              "drug_product.asc",
+              "drug_product.desc.nullsfirst",
+              "drug_product.desc.nulllast",
+              "drug_product.desc",
+              "drug_product.nullsfirst",
+              "drug_product.nulllast",
+              "drug_product"
+            ],
+            "description": "Ordering"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "count=none", "count=exact"
+            ],
+            "description": "Preference"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "text",
+            "required": false,
+            "in": "query",
+            "name": "extract",
+            "type": "string"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "integer",
+            "required": false,
+            "in": "query",
+            "name": "drug_code",
+            "type": "string"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "jsonb",
+            "required": false,
+            "in": "query",
+            "name": "drug_product",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "Partial Content"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "dpd_json"
+        ],
+        "consumes": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "return=representation",
+              "return=minimal",
+              "return=none"
+            ],
+            "description": "Preference"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#\/definitions\/dpd_json"
+            },
+            "in": "body",
+            "name": "body",
+            "description": "dpd_json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "dpd_json"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "return=representation",
+              "return=minimal",
+              "return=none"
+            ],
+            "description": "Preference"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "text",
+            "required": false,
+            "in": "query",
+            "name": "extract",
+            "type": "string"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "integer",
+            "required": false,
+            "in": "query",
+            "name": "drug_code",
+            "type": "string"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "jsonb",
+            "required": false,
+            "in": "query",
+            "name": "drug_product",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "dpd_json"
+        ],
+        "consumes": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "return=representation",
+              "return=minimal",
+              "return=none"
+            ],
+            "description": "Preference"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#\/definitions\/dpd_json"
+            },
+            "in": "body",
+            "name": "body",
+            "description": "dpd_json"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "text",
+            "required": false,
+            "in": "query",
+            "name": "extract",
+            "type": "string"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "integer",
+            "required": false,
+            "in": "query",
+            "name": "drug_code",
+            "type": "string"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "jsonb",
+            "required": false,
+            "in": "query",
+            "name": "drug_product",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "\/dpd_json3": {
+      "get": {
+        "tags": [
+          "dpd_json3"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "default": "items",
+            "required": false,
+            "in": "header",
+            "name": "Range-Unit",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "offset",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "limit",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "select",
+            "type": "string",
+            "description": "Filtering Columns"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "count=none"
+            ],
+            "description": "Preference"
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "Partial Content"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "\/dpd_search": {
+      "get": {
+        "tags": [
+          "dpd_search"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "default": "items",
+            "required": false,
+            "in": "header",
+            "name": "Range-Unit",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "offset",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "limit",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "select",
+            "type": "string",
+            "description": "Filtering Columns"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "count=none"
+            ],
+            "description": "Preference"
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "Partial Content"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "\/product_monographs": {
+      "get": {
+        "tags": [
+          "product_monographs"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "default": "items",
+            "required": false,
+            "in": "header",
+            "name": "Range-Unit",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "offset",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "limit",
+            "type": "string",
+            "description": "Limiting and Pagination"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "select",
+            "type": "string",
+            "description": "Filtering Columns"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "count=none"
+            ],
+            "description": "Preference"
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "Partial Content"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "product_monographs"
+        ],
+        "consumes": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "return=representation",
+              "return=minimal",
+              "return=none"
+            ],
+            "description": "Preference"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#\/definitions\/product_monographs"
+            },
+            "in": "body",
+            "name": "body",
+            "description": "product_monographs"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "product_monographs"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "return=representation",
+              "return=minimal",
+              "return=none"
+            ],
+            "description": "Preference"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "product_monographs"
+        ],
+        "consumes": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "produces": [
+          "application\/json",
+          "application\/vnd.pgrst.object+json",
+          "text\/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "return=representation",
+              "return=minimal",
+              "return=none"
+            ],
+            "description": "Preference"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#\/definitions\/product_monographs"
+            },
+            "in": "body",
+            "name": "body",
+            "description": "product_monographs"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "active_ingredient": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "active_ingredient_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "ingredient": {
+          "format": "text",
+          "type": "string"
+        },
+        "ingredient_supplied_ind": {
+          "format": "text",
+          "type": "string"
+        },
+        "strength": {
+          "format": "text",
+          "type": "string"
+        },
+        "strength_unit": {
+          "format": "text",
+          "type": "string"
+        },
+        "strength_type": {
+          "format": "text",
+          "type": "string"
+        },
+        "dosage_value": {
+          "format": "text",
+          "type": "string"
+        },
+        "base": {
+          "format": "text",
+          "type": "string"
+        },
+        "dosage_unit": {
+          "format": "text",
+          "type": "string"
+        },
+        "notes": {
+          "format": "text",
+          "type": "string"
+        },
+        "ingredient_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "strength_unit_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "strength_type_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "dosage_unit_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "companies": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "mfr_code": {
+          "format": "text",
+          "type": "string"
+        },
+        "company_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "company_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "company_type": {
+          "format": "text",
+          "type": "string"
+        },
+        "address_mailing_flag": {
+          "format": "text",
+          "type": "string"
+        },
+        "address_billing_flag": {
+          "format": "text",
+          "type": "string"
+        },
+        "address_notification_flag": {
+          "format": "text",
+          "type": "string"
+        },
+        "address_other": {
+          "format": "text",
+          "type": "string"
+        },
+        "suite_number": {
+          "format": "text",
+          "type": "string"
+        },
+        "street_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "city_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "province": {
+          "format": "text",
+          "type": "string"
+        },
+        "country": {
+          "format": "text",
+          "type": "string"
+        },
+        "postal_code": {
+          "format": "text",
+          "type": "string"
+        },
+        "post_office_box": {
+          "format": "text",
+          "type": "string"
+        },
+        "province_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "country_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dpd_ing_json": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "ingredient": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_product": {
+          "format": "jsonb",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dpd_json": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "drug_product": {
+          "format": "jsonb",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dpd_json3": {
+      "type": "object"
+    },
+    "dpd_search": {
+      "type": "object"
+    },
+    "drug_product": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "product_categorization": {
+          "format": "text",
+          "type": "string"
+        },
+        "class": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_identification_number": {
+          "format": "text",
+          "type": "string"
+        },
+        "brand_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "descriptor": {
+          "format": "text",
+          "type": "string"
+        },
+        "pediatric_flag": {
+          "format": "text",
+          "type": "string"
+        },
+        "accession_number": {
+          "format": "text",
+          "type": "string"
+        },
+        "number_of_ais": {
+          "format": "text",
+          "type": "string"
+        },
+        "last_update_date": {
+          "format": "date",
+          "type": "string"
+        },
+        "ai_group_no": {
+          "format": "text",
+          "type": "string"
+        },
+        "class_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "brand_name_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "descriptor_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "packaging": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "upc": {
+          "format": "text",
+          "type": "string"
+        },
+        "package_size_unit": {
+          "format": "text",
+          "type": "string"
+        },
+        "package_type": {
+          "format": "text",
+          "type": "string"
+        },
+        "package_size": {
+          "format": "text",
+          "type": "string"
+        },
+        "product_information": {
+          "format": "text",
+          "type": "string"
+        },
+        "package_size_unit_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "package_type_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "pharmaceutical_form": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "pharm_form_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "pharmaceutical_form": {
+          "format": "text",
+          "type": "string"
+        },
+        "pharmaceutical_form_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "pharmaceutical_std": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "pharmaceutical_std": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "product_monographs": {
+      "type": "object"
+    },
+    "route": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "route_of_administration_code": {
+          "format": "text",
+          "type": "string"
+        },
+        "route_of_administration": {
+          "format": "text",
+          "type": "string"
+        },
+        "route_of_administration_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "schedule": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "schedule": {
+          "format": "text",
+          "type": "string"
+        },
+        "schedule_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "status": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "current_status_flag": {
+          "format": "text",
+          "type": "string"
+        },
+        "status": {
+          "format": "text",
+          "type": "string"
+        },
+        "history_date": {
+          "format": "date",
+          "type": "string"
+        },
+        "status_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "lot_number": {
+          "format": "text",
+          "type": "string"
+        },
+        "expiration_date": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "therapeutic_class": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "tc_atc_number": {
+          "format": "text",
+          "type": "string"
+        },
+        "tc_atc": {
+          "format": "text",
+          "type": "string"
+        },
+        "tc_ahfs_number": {
+          "format": "text",
+          "type": "string"
+        },
+        "tc_ahfs": {
+          "format": "text",
+          "type": "string"
+        },
+        "tc_atc_f": {
+          "format": "text",
+          "type": "string"
+        },
+        "tc_ahfs_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "vet_species": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "vet_species": {
+          "format": "text",
+          "type": "string"
+        },
+        "vet_sub_species": {
+          "format": "text",
+          "type": "string"
+        },
+        "vet_species_f": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}
