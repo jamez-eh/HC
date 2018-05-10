@@ -1,0 +1,514 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.1",
+    "title": "Drug Product Database (DPD) API",
+    "description": "From Health Canada",
+    "contact": {
+      "email": "bimal.bhagrath@canada.ca"
+    }
+  },
+  "host": "rest-dev.hres.ca/rest-dev",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/dpd_json": {
+      "get": {
+        "summary": "Endpoint for drug product information",
+        "tags": [
+          "dpd_json"
+        ],
+        "produces": [
+          "application/json",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range",
+            "type": "range[int]",
+            "description": "Pagination (ex. 25-*)"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range-Unit",
+            "type": "string",
+            "enum": [
+              "items"
+            ],
+            "description": "Pagination"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "count=none",
+              "count=exact"
+            ],
+            "description": "Preferences"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "offset",
+            "type": "int",
+            "description": "Results to skip"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "limit",
+            "type": "int",
+            "description": "Number of results to return"
+          },
+          {
+            "default": "*",
+            "required": false,
+            "in": "query",
+            "name": "select",
+            "type": "string",
+            "enum": [
+              "*",
+              "extract",
+              "drug_code",
+              "drug_product"
+            ],
+            "description": "Vertical filtering (for multiple values, seperate with comma)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "order",
+            "type": "string",
+            "description": "Result ordering (For details refer to <a href='https://postgrest.org/en/v4.4/api.html#ordering'>Ordering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "text",
+            "required": false,
+            "in": "query",
+            "name": "extract",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "integer",
+            "required": false,
+            "in": "query",
+            "name": "drug_code",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "jsonb",
+            "required": false,
+            "in": "query",
+            "name": "drug_product",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      }
+    },
+    "/dpd_json3": {
+      "get": {
+        "summary": "Endpoint for full text search",
+        "tags": [
+          "dpd_json3"
+        ],
+        "produces": [
+          "application/json",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range",
+            "type": "range[int]",
+            "description": "Pagination (ex. 25-*)"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range-Unit",
+            "type": "string",
+            "enum": [
+              "items"
+            ],
+            "description": "Pagination"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "count=none",
+              "count=exact"
+            ],
+            "description": "Preferences"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "offset",
+            "type": "string",
+            "description": "Results to skip"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "limit",
+            "type": "string",
+            "description": "Number of results to return"
+          },
+          {
+            "default": "*",
+            "required": false,
+            "in": "query",
+            "name": "select",
+            "type": "string",
+            "enum": [
+              "*",
+              "extract",
+              "drug_code",
+              "drug_product",
+              "search"
+            ],
+            "description": "Vertical filtering (for multiple values, seperate with comma)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "text",
+            "required": false,
+            "in": "query",
+            "name": "extract",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "integer",
+            "required": false,
+            "in": "query",
+            "name": "drug_code",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "jsonb",
+            "required": false,
+            "in": "query",
+            "name": "drug_product",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "required": false,
+            "in": "query",
+            "name": "search",
+            "type": "array[string]",
+            "description": "Full text search (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      }
+    },
+    "/dpd_search": {
+      "get": {
+        "summary": "Endpoint for keyword auto-complete",
+        "tags": [
+          "dpd_search"
+        ],
+        "produces": [
+          "application/json",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range",
+            "type": "range[int]",
+            "description": "Pagination (ex. 25-*)"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range-Unit",
+            "type": "string",
+            "enum": [
+              "items"
+            ],
+            "description": "Pagination"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "count=none",
+              "count=exact"
+            ],
+            "description": "Preferences"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "offset",
+            "type": "int",
+            "description": "Results to skip"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "limit",
+            "type": "int",
+            "description": "Number of results to return"
+          },
+          {
+            "default": "*",
+            "required": false,
+            "in": "query",
+            "name": "select",
+            "type": "string",
+            "enum": [
+              "brand_name",
+              "company_name",
+              "ingredient"
+            ],
+            "description": "Vertical filtering (for multiple values, seperate with comma)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "text",
+            "required": false,
+            "in": "query",
+            "name": "brand_name",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "text",
+            "required": false,
+            "in": "query",
+            "name": "company_name",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "format": "text",
+            "required": false,
+            "in": "query",
+            "name": "ingredient",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      }
+    },
+    "/product_monographs": {
+      "get": {
+        "summary": "Endpoint for electronic monographs",
+        "tags": [
+          "product_monographs"
+        ],
+        "produces": [
+          "application/json",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range",
+            "type": "string",
+            "description": "Pagination (ex. 25-*)"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Range-Unit",
+            "type": "string",
+            "enum": [
+              "items"
+            ],
+            "description": "Pagination"
+          },
+          {
+            "required": false,
+            "in": "header",
+            "name": "Prefer",
+            "type": "string",
+            "enum": [
+              "count=none",
+              "count=exact"
+            ],
+            "description": "Preferences"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "offset",
+            "type": "int",
+            "description": "Results to skip"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "name": "limit",
+            "type": "int",
+            "description": "Number of results to return"
+          },
+          {
+            "default": "*",
+            "required": false,
+            "in": "query",
+            "name": "select",
+            "type": "string",
+            "enum": [
+              "*",
+              "pm_english_fname",
+              "pm_french_fname",
+              "pm_date",
+              "pm_control_number",
+              "pm_number",
+              "drug_code",
+              "pm_ver_number"
+            ],
+            "description": "Vertical filtering (for multiple values, seperate with comma)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "required": false,
+            "in": "query",
+            "name": "pm_english_fname",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "required": false,
+            "in": "query",
+            "name": "pm_french_fname",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "required": false,
+            "in": "query",
+            "name": "pm_date",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "required": false,
+            "in": "query",
+            "name": "pm_control_number",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "required": false,
+            "in": "query",
+            "name": "pm_number",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "required": false,
+            "in": "query",
+            "name": "drug_code",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          },
+          {
+            "pattern": "^not[.]<@[.]|^not[.]eq[.]|^not[.]ilike[.]|^not[.]lte[.]|^not[.]@@[.]|^not[.]gt[.]|^not[.]@>[.]|^not[.]in[.]|^not[.]isnot[.]|^not[.]neq[.]|^not[.]is[.]|^not[.]notin[.]|^not[.]lt[.]|^not[.]like[.]|^not[.]gte[.]|^<@[.]|^eq[.]|^ilike[.]|^lte[.]|^@@[.]|^gt[.]|^@>[.]|^in[.]|^isnot[.]|^neq[.]|^is[.]|^notin[.]|^lt[.]|^like[.]|^gte[.]",
+            "required": false,
+            "in": "query",
+            "name": "pm_ver_number",
+            "type": "string",
+            "description": "Horizontal filtering (for details refer to <a href='https://postgrest.org/en/v4.4/api.html#horizontal-filtering-rows'>Horizontal Filtering</a>)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "dpd_json": {
+      "properties": {
+        "extract": {
+          "format": "text",
+          "type": "string"
+        },
+        "drug_code": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "drug_product": {
+          "format": "jsonb",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dpd_json3": {
+      "type": "object"
+    },
+    "dpd_search": {
+      "type": "object"
+    },
+    "product_monographs": {
+      "type": "object"
+    }
+  }
+}
