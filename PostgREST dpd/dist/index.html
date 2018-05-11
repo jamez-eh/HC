@@ -3,11 +3,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Swagger UI</title>
+    <title>Drug Product Database (DPD) API</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./swagger-ui.css" >
-    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+    <!--<link rel="stylesheet" type="text/css" href="./theme-feeling-blue.css">-->
+    <link rel="icon" type="image/png" href="./favicon-mobile.png" />
     <style>
       html
       {
@@ -28,6 +28,12 @@
         margin:0;
         background: #fafafa;
       }
+
+      /*custom*/
+
+      .topbar-wrapper {
+        display: "none";
+      }
     </style>
   </head>
 
@@ -41,7 +47,7 @@
 
       // Build a system
       const ui = SwaggerUIBundle({
-        url: "http://petstore.swagger.io/v2/swagger.json",
+        url: "https://api.myjson.com/bins/v4kcu",
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
