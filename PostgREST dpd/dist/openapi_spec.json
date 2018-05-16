@@ -61,7 +61,8 @@
             "description": "Results to skip"
           },
           {
-            "required": false,
+            "default": 50,
+            "required": true,
             "in": "query",
             "name": "limit",
             "type": "integer",
@@ -164,7 +165,8 @@
             "description": "Results to skip"
           },
           {
-            "required": false,
+            "default": 50,
+            "required": true,
             "in": "query",
             "name": "limit",
             "type": "string",
@@ -281,7 +283,8 @@
             "description": "Results to skip"
           },
           {
-            "required": false,
+            "default": 50,
+            "required": true,
             "in": "query",
             "name": "limit",
             "type": "integer",
@@ -385,7 +388,8 @@
             "description": "Results to skip"
           },
           {
-            "required": false,
+            "default": 50,
+            "required": true,
             "in": "query",
             "name": "limit",
             "type": "integer",
